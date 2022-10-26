@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/entity/dungeon_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tileset.png" type="Texture" id=2]
+[ext_resource path="res://assets/default_dungeon_material.tres" type="Material" id=3]
+
+[sub_resource type="ProceduralSky" id=1]
+
+[sub_resource type="Environment" id=2]
+background_mode = 1
+background_sky = SubResource( 1 )
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_unshaded = true
+albedo_color = Color( 0.67451, 0.172549, 0.172549, 1 )
+
+[sub_resource type="CubeMesh" id=4]
+material = SubResource( 3 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[node name="Level" type="Spatial"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1, 6 )
+
+[node name="DungeonTile" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1 )
+script = ExtResource( 1 )
+material = ExtResource( 3 )
+texture_sheet = ExtResource( 2 )
+north_face = 0
+east_face = 0
+top_face = 5
+bottom_face = 4
+
+[node name="DungeonTile2" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1 )
+script = ExtResource( 1 )
+material = ExtResource( 3 )
+texture_sheet = ExtResource( 2 )
+east_face = 0
+south_face = 0
+top_face = 5
+
+[node name="DungeonTile5" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2, 1 )
+script = ExtResource( 1 )
+material = ExtResource( 3 )
+texture_sheet = ExtResource( 2 )
+north_face = 0
+east_face = 0
+south_face = 0
+west_face = 0
+bottom_face = 4
+
+[node name="DungeonTile3" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1 )
+script = ExtResource( 1 )
+material = ExtResource( 3 )
+texture_sheet = ExtResource( 2 )
+south_face = 0
+west_face = 0
+top_face = 5
+bottom_face = 4
+
+[node name="DungeonTile4" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1 )
+script = ExtResource( 1 )
+material = ExtResource( 3 )
+texture_sheet = ExtResource( 2 )
+north_face = 0
+west_face = 0
+top_face = 5
+bottom_face = 4
+
+[node name="RigidBody" type="RigidBody" parent="."]
+transform = Transform( 0.0951933, 0.626647, 0.773468, -0.0913793, 0.779216, -0.620059, -0.991256, -0.0116532, 0.131439, 0.233774, 0.164202, 0.496897 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody"]
+mesh = SubResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
+shape = SubResource( 5 )

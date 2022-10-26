@@ -1,0 +1,48 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Spatial",
+"class": "DungeonTile",
+"language": "GDScript",
+"path": "res://scenes/entity/dungeon_tile.gd"
+}, {
+"base": "EditorSpatialGizmoPlugin",
+"class": "DungeonTileGizmo",
+"language": "GDScript",
+"path": "res://scenes/entity/dungeon_tile_gizmo.gd"
+} ]
+_global_script_class_icons={
+"DungeonTile": "",
+"DungeonTileGizmo": ""
+}
+
+[application]
+
+config/name="DungeonCrawler"
+run/main_scene="res://scenes/level.tscn"
+config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

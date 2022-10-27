@@ -35,6 +35,10 @@ config/icon="res://icon.png"
 window/size/width=1920
 window/size/height=1080
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/level_block/plugin.cfg" )
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

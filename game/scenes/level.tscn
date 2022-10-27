@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/entity/dungeon_tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tileset.png" type="Texture" id=2]
 [ext_resource path="res://assets/default_dungeon_material.tres" type="Material" id=3]
+[ext_resource path="res://addons/level_block/level_block_node.gd" type="Script" id=4]
+[ext_resource path="res://addons/level_block/default_material.tres" type="Material" id=5]
 
 [sub_resource type="ProceduralSky" id=1]
 
@@ -87,3 +89,15 @@ mesh = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
 shape = SubResource( 5 )
+
+[node name="LevelBlock" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0 )
+script = ExtResource( 4 )
+material = ExtResource( 5 )
+texture_sheet = ExtResource( 2 )
+north_face = 0
+east_face = 0
+south_face = 0
+west_face = 0
+top_face = 5
+bottom_face = 4

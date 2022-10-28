@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/tileset.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Control
+
+onready var texture := $TextureRect
+onready var value := $SpinBox
+
+var current_value := 0
+var updating := false
+var texture_sheet : Texture
+var texture_size : float
+var asft = \"awf\"
+
+func _init():
+	value.connect(\"changed\", self, \"update_value\")
+	refresh_control()
+
+func update_property():
+	var new_value = get_edited_object()[get_edited_property()]
+	if (new_value == current_value):
+		return
+	updating = true
+	current_value = new_value
+	refresh_control()
+	updating = false
+
+func get_uv_gap() -> float:
+	return texture_size / texture_sheet.get_size().x
+
+func get_uv_position(index: int) -> Vector2:
+	var pos = Vector2.ZERO
+	pos.x = fmod(get_uv_gap() * index, 1.0)
+	pos.y = floor(index / (1.0 / get_uv_gap())) * get_uv_gap()
+	return pos
+
+func refresh_control():
+	if not texture_sheet is Texture:
+		return
+	texture.texture = AtlasTexture.new()
+	texture.texture.atlas = texture_sheet
+	var pos = Vector2.ZERO
+	var gap = texture_size / texture_sheet.get_size().x
+	pos.x = fmod(gap * current_value, 1.0)
+	pos.y = floor(current_value / (1.0 / gap)) * gap
+	texture.texture.region.position = pos
+	texture.texture.region.size = Vector2(texture_size, texture_size)
+"
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[node name="TextureSelector" type="HBoxContainer"]
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/separation = 20
+script = SubResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+texture = SubResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="SpinBox" type="SpinBox" parent="."]
+margin_left = 84.0
+margin_top = 20.0
+margin_right = 158.0
+margin_bottom = 44.0
+size_flags_vertical = 4

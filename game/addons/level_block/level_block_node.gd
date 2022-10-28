@@ -9,7 +9,10 @@ export(Texture) var texture_sheet setget set_texture
 func set_texture(new_value):
 	texture_sheet = new_value
 	refresh()
-export(int) var texture_size = 32
+export(float) var texture_size = 32 setget set_texture_size
+func set_texture_size(new_value):
+	texture_size = new_value
+	refresh()
 
 export(int) var north_face = -1 setget set_north
 func set_north(new_value):
@@ -34,6 +37,11 @@ func set_top(new_value):
 export(int) var bottom_face = -1 setget set_bottom
 func set_bottom(new_value):
 	bottom_face = new_value
+	refresh()
+
+export(bool) var flip_faces = false setget set_flip_faces
+func set_flip_faces(new_value):
+	flip_faces = new_value
 	refresh()
 
 var faces
@@ -91,13 +99,14 @@ func get_uv_position(index: int) -> Vector2:
 	return pos
 
 func create_mesh() -> Mesh:
-	var st = SurfaceTool.new()
-	
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var normals = [Vector3.BACK, Vector3.LEFT, Vector3.FORWARD, Vector3.RIGHT, Vector3.DOWN, Vector3.UP]
 	var rot_axis = [Vector3.DOWN, Vector3.LEFT]
+	if flip_faces:
+		normals = [Vector3.FORWARD, Vector3.RIGHT, Vector3.BACK, Vector3.LEFT, Vector3.UP, Vector3.DOWN]
 	var rot_angle = [0.0, PI / 2.0, PI, PI + (PI / 2), -(PI / 2.0), PI / 2.0]
 	
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for i in range(6):
 		st.add_normal(normals[i])
 		st.add_uv(get_uv_position(faces[i]))
@@ -126,6 +135,16 @@ func create_mesh() -> Mesh:
 		if faces[i] < 0:
 			continue
 		
+		if flip_faces:
+			st.add_index(3 + (i * 4))
+			st.add_index(1 + (i * 4))
+			st.add_index(0 + (i * 4))
+		
+			st.add_index(3 + (i * 4))
+			st.add_index(2 + (i * 4))
+			st.add_index(1 + (i * 4))
+			continue
+		
 		st.add_index(0 + (i * 4))
 		st.add_index(1 + (i * 4))
 		st.add_index(3 + (i * 4))
@@ -141,8 +160,8 @@ func _notification(what):
 		NOTIFICATION_TRANSFORM_CHANGED:
 			refresh()
 
-func _enter_tree():
+func _enter_tree() -> void:
 	refresh()
 
-func _exit_tree():
+func _exit_tree() -> void:
 	clear()

@@ -90,11 +90,16 @@ mesh = SubResource( 4 )
 [node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
 shape = SubResource( 5 )
 
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0 )
+omni_range = 3.0
+
 [node name="LevelBlock" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0 )
 script = ExtResource( 4 )
 material = ExtResource( 5 )
 texture_sheet = ExtResource( 2 )
+texture_size = 32
 north_face = 0
 east_face = 0
 south_face = 0

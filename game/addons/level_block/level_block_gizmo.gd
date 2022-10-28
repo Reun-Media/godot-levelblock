@@ -43,9 +43,7 @@ func redraw(gizmo):
 	
 	var block = gizmo.get_spatial_node() as LevelBlock
 	var cube := CubeMesh.new()
-	cube.size = Vector3(block.size, block.size, block.size) * 2.0
+	cube.size = Vector3.ONE * 2.0
 	gizmo.add_collision_triangles(cube.generate_triangle_mesh())
 	var lines = PoolVector3Array(cube_line_points)
-	for point in lines:
-		point *= block.size
 	gizmo.add_lines(lines, get_material("cube", gizmo))

@@ -2,16 +2,21 @@ tool
 
 extends Spatial
 
+signal texture_updated(new_texture)
+signal texture_size_updated(new_size)
+
 const size = 1.0
 
 export(SpatialMaterial) var material = load("res://addons/level_block/default_material.tres")
 export(Texture) var texture_sheet setget set_texture
 func set_texture(new_value):
 	texture_sheet = new_value
+	emit_signal("texture_updated", texture_sheet)
 	refresh()
 export(float) var texture_size = 32 setget set_texture_size
 func set_texture_size(new_value):
 	texture_size = new_value
+	emit_signal("texture_size_updated", texture_size)
 	refresh()
 
 export(int) var north_face = -1 setget set_north

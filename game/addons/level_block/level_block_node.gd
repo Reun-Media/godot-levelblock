@@ -6,6 +6,7 @@ signal texture_updated(new_texture)
 signal texture_size_updated(new_size)
 
 const size = 1.0
+const occluder_multiplier = 1.001
 
 export(SpatialMaterial) var material = load("res://addons/level_block/default_material.tres")
 export(Texture) var texture_sheet setget set_texture
@@ -49,11 +50,22 @@ func set_flip_faces(new_value):
 	flip_faces = new_value
 	refresh()
 
+export(bool) var generate_collision = true setget set_generate_collision
+func set_generate_collision(new_value):
+	generate_collision = new_value
+	refresh()
+
+export(bool) var generate_occluders = false setget set_generate_occluders
+func set_generate_occluders(new_value):
+	generate_occluders = new_value
+	refresh()
+
 var faces
 var visual
 var body
 var mesh
 var shape
+var occluders : Array
 
 func _ready():
 	set_notify_transform(true)
@@ -64,8 +76,11 @@ func refresh():
 	faces = [north_face, east_face, south_face, west_face, top_face, bottom_face]
 	if faces.max() < 0:
 		return
+	if generate_occluders:
+		create_occluders()
 	mesh = create_mesh()
 	mesh.surface_set_material(0, material)
+	material.albedo_texture = texture_sheet
 	# VisualServer
 	visual = VisualServer.instance_create()
 	if is_inside_tree():
@@ -73,6 +88,8 @@ func refresh():
 	VisualServer.instance_set_base(visual, mesh)
 	VisualServer.instance_set_transform(visual, transform)
 	# PhysicsServer
+	if !generate_collision:
+		return
 	body = PhysicsServer.body_create(PhysicsServer.BODY_MODE_STATIC)
 	PhysicsServer.body_set_mode(body, PhysicsServer.BODY_MODE_STATIC)
 	shape = PhysicsServer.shape_create(PhysicsServer.SHAPE_CONCAVE_POLYGON)
@@ -81,7 +98,6 @@ func refresh():
 	if is_inside_tree():
 		PhysicsServer.body_set_space(body, get_world().space)
 	PhysicsServer.body_set_ray_pickable(body, true)
-	material.albedo_texture = texture_sheet
 
 func clear():
 	if visual is RID:
@@ -93,6 +109,10 @@ func clear():
 	if shape is RID:
 		PhysicsServer.free_rid(shape)
 		shape = null
+	if occluders.size() > 0:
+		for o in occluders:
+			o.queue_free()
+	occluders.clear()
 
 func get_uv_gap() -> float:
 	return float(texture_size) / texture_sheet.get_size().x
@@ -159,6 +179,22 @@ func create_mesh() -> Mesh:
 		st.add_index(3 + (i * 4))
 	
 	return st.commit()
+
+func create_occluders():
+	var positions = [Vector3.FORWARD, Vector3.RIGHT, Vector3.BACK, Vector3.LEFT, Vector3.UP, Vector3.DOWN]
+	var rot_axis = [Vector3.UP, Vector3.RIGHT]
+	var rot_angle = [0.0, -(PI / 2.0), PI, PI / 2, PI / 2.0, -(PI / 2.0)]
+	for i in range(6):
+		if faces[i] < 0:
+			continue
+		var occluder = Occluder.new()
+		occluder.shape = OccluderShapePolygon.new()
+		for p in range(occluder.shape.polygon_points.size()):
+			occluder.shape.polygon_points[p] *= occluder_multiplier
+		occluder.translation = positions[i]
+		occluder.rotate(rot_axis[i / 4], rot_angle[i])
+		add_child(occluder)
+		occluders.append(occluder)
 
 func _notification(what):
 	match what:

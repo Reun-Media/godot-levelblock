@@ -8,22 +8,6 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Spatial",
-"class": "DungeonTile",
-"language": "GDScript",
-"path": "res://scenes/entity/dungeon_tile.gd"
-}, {
-"base": "EditorSpatialGizmoPlugin",
-"class": "DungeonTileGizmo",
-"language": "GDScript",
-"path": "res://scenes/entity/dungeon_tile_gizmo.gd"
-} ]
-_global_script_class_icons={
-"DungeonTile": "",
-"DungeonTileGizmo": ""
-}
-
 [application]
 
 config/name="LevelBlockPlugin"

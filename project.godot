@@ -70,6 +70,10 @@ strafe_right={
  ]
 }
 
+[mono]
+
+project/assembly_name="LevelBlockPlugin"
+
 [physics]
 
 common/enable_pause_aware_picking=true

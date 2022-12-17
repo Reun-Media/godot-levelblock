@@ -200,6 +200,9 @@ func _notification(what):
 	match what:
 		NOTIFICATION_TRANSFORM_CHANGED:
 			refresh()
+		NOTIFICATION_VISIBILITY_CHANGED:
+			if visual is RID:
+				VisualServer.instance_set_visible(visual, is_visible_in_tree())
 
 func _enter_tree() -> void:
 	refresh()

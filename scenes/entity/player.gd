@@ -16,7 +16,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("action"):
 		if check_collision(Vector3.FORWARD.rotated(Vector3.UP, rotation.y)):
 			var result = return_collision(Vector3.FORWARD.rotated(Vector3.UP, rotation.y))
-			if result:
+			if result && result["collider"]:
 				if result["collider"].has_method("interact"):
 					result["collider"].interact()
 	if Input.is_action_pressed("forward"):

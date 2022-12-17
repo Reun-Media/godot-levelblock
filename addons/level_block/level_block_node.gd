@@ -86,7 +86,7 @@ func refresh():
 	if is_inside_tree():
 		VisualServer.instance_set_scenario(visual, get_world().scenario)
 	VisualServer.instance_set_base(visual, mesh)
-	VisualServer.instance_set_transform(visual, transform)
+	VisualServer.instance_set_transform(visual, global_transform)
 	# PhysicsServer
 	if !generate_collision:
 		return
@@ -94,7 +94,7 @@ func refresh():
 	PhysicsServer.body_set_mode(body, PhysicsServer.BODY_MODE_STATIC)
 	shape = PhysicsServer.shape_create(PhysicsServer.SHAPE_CONCAVE_POLYGON)
 	PhysicsServer.shape_set_data(shape, mesh.get_faces())
-	PhysicsServer.body_add_shape(body, shape, transform)
+	PhysicsServer.body_add_shape(body, shape, global_transform)
 	if is_inside_tree():
 		PhysicsServer.body_set_space(body, get_world().space)
 	PhysicsServer.body_set_ray_pickable(body, true)

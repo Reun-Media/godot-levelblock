@@ -75,14 +75,14 @@ params_specular_mode = 4
 albedo_texture = ExtResource( 2 )
 metallic_specular = 0.0
 uv1_scale = Vector3( 0.125, 0.25, 1 )
-uv1_offset = Vector3( 0.75, 0.25, 0 )
+uv1_offset = Vector3( 0.75, 0, 0 )
 
 [sub_resource type="SpatialMaterial" id=9]
 params_specular_mode = 4
 albedo_texture = ExtResource( 2 )
 metallic_specular = 0.0
 uv1_scale = Vector3( 0.125, 0.25, 1 )
-uv1_offset = Vector3( 0.875, 0.25, 0 )
+uv1_offset = Vector3( 0.875, 0, 0 )
 
 [node name="Level" type="Spatial"]
 
@@ -94,12 +94,17 @@ light_energy = 2.0
 omni_range = 6.0
 
 [node name="OmniLight3" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -1 )
 light_color = Color( 0.596078, 1, 0.737255, 1 )
 omni_range = 6.0
 
 [node name="OmniLight2" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
+light_color = Color( 1, 0.854167, 0.75, 1 )
+omni_range = 6.0
+
+[node name="OmniLight4" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
 light_color = Color( 1, 0.854167, 0.75, 1 )
 omni_range = 6.0
 
@@ -232,7 +237,7 @@ material = ExtResource( 5 )
 texture_sheet = ExtResource( 2 )
 texture_size = 32
 north_face = 0
-east_face = 3
+east_face = 7
 south_face = 0
 top_face = 5
 bottom_face = 4
@@ -249,7 +254,7 @@ texture_sheet = ExtResource( 2 )
 texture_size = 32
 north_face = 0
 south_face = 0
-west_face = 3
+west_face = 7
 top_face = 5
 bottom_face = 4
 generate_occluders = true
@@ -278,7 +283,7 @@ __meta__ = {
 material = ExtResource( 5 )
 texture_sheet = ExtResource( 2 )
 texture_size = 32
-east_face = 3
+east_face = 7
 top_face = 5
 bottom_face = 4
 generate_occluders = true
@@ -307,7 +312,7 @@ __meta__ = {
 material = ExtResource( 5 )
 texture_sheet = ExtResource( 2 )
 texture_size = 32
-south_face = 3
+south_face = 6
 top_face = 5
 bottom_face = 4
 generate_occluders = true
@@ -336,7 +341,7 @@ __meta__ = {
 material = ExtResource( 5 )
 texture_sheet = ExtResource( 2 )
 texture_size = 32
-west_face = 3
+west_face = 9
 top_face = 5
 bottom_face = 4
 generate_collision = false
@@ -425,7 +430,7 @@ __meta__ = {
 material = ExtResource( 5 )
 texture_sheet = ExtResource( 2 )
 texture_size = 32
-east_face = 3
+east_face = 9
 generate_collision = false
 generate_occluders = true
 
@@ -437,7 +442,7 @@ __meta__ = {
 material = ExtResource( 5 )
 texture_sheet = ExtResource( 2 )
 texture_size = 32
-bottom_face = 4
+bottom_face = 14
 generate_occluders = true
 
 [node name="LevelBlock18" type="Spatial" parent="Level"]
@@ -453,7 +458,7 @@ north_face = 0
 east_face = 0
 south_face = 0
 west_face = 0
-top_face = 5
+top_face = 15
 generate_occluders = true
 
 [node name="Player" parent="." instance=ExtResource( 1 )]

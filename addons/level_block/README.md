@@ -4,7 +4,7 @@
 
 This node acts as an inside-facing cube, using a texture atlas sheet to display different parts for each face.
 ## Getting started
-1. Download the plugin from GitHub and install it. See a guide here: [Godot Docs](https://docs.godotengine.org/en/stable/tutorials/plugins/editor/installing_plugins.html)
+1. Download the plugin from GitHub or [Godot Asset Library](https://godotengine.org/asset-library/asset/1584) and install it. See a guide here: [Godot Docs](https://docs.godotengine.org/en/stable/tutorials/plugins/editor/installing_plugins.html)
 2. Add new LevelBlock nodes to your scene.
 3. Configure the texture sheet (and optionally material) you want to use.
 4. Configure the size of the square textures contained in the texture sheet.

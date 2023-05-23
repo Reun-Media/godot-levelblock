@@ -12,8 +12,9 @@ var face_paths := [
 	"bottom_face"
 ]
 
+
 func can_handle(object):
-	if object is BlockNode:
+	if object == BlockNode:
 		return true
 	return false
 

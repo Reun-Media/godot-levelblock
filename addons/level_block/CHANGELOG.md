@@ -7,9 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.3] - 2023-05-18
-- Now work with Godot 4.0.2.stable
- 
 ## [1.0.2] - 2022-12-22
 ### Fixed
 - Global transforms are only set inside scene tree

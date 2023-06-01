@@ -16,5 +16,5 @@ func _enter_tree():
 
 func _exit_tree():
 	remove_custom_type("LevelBlock")
-	add_node_3d_gizmo_plugin(gizmo_plugin)
+	remove_node_3d_gizmo_plugin(gizmo_plugin)
 	remove_inspector_plugin(inspector_plugin)

@@ -7,7 +7,7 @@ signal texture_size_updated(new_size)
 const size = 1.0
 const occluder_multiplier = 1.001
 
-@export var material := load("res://addons/level_block/default_material.tres")
+@export var material:BaseMaterial3D = load("res://addons/level_block/default_material.tres")
 @export var texture_sheet:Texture = null : set = set_texture
 func set_texture(new_value):
 	texture_sheet = new_value
@@ -63,7 +63,7 @@ var shape
 var occluders : Array
 
 func _ready():
-	set_notify_transform(false)
+	set_notify_transform(true)
 	refresh()
 
 func refresh():
@@ -87,8 +87,8 @@ func refresh():
 		return
 	body = PhysicsServer3D.body_create()
 	PhysicsServer3D.body_set_mode(body, PhysicsServer3D.BODY_MODE_STATIC)
-	shape = PhysicsServer3D.area_create()
-	PhysicsServer3D.shape_set_data(shape, mesh.get_faces())
+	shape = PhysicsServer3D.concave_polygon_shape_create()
+	PhysicsServer3D.shape_set_data(shape, {"faces" : mesh.get_faces()})
 	if is_inside_tree():
 		PhysicsServer3D.body_add_shape(body, shape, global_transform)
 		PhysicsServer3D.body_set_space(body, get_world_3d().space)

@@ -1,4 +1,4 @@
-tool
+@tool
 
 extends "res://addons/level_block/level_block_node.gd"
 

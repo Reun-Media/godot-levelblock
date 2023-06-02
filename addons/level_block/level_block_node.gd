@@ -8,7 +8,7 @@ const size = 1.0
 const occluder_multiplier = 1.001
 
 @export var material:BaseMaterial3D = load("res://addons/level_block/default_material.tres")
-@export var texture_sheet:Texture = null : set = set_texture
+@export var texture_sheet:Texture2D = null : set = set_texture
 func set_texture(new_value):
 	texture_sheet = new_value
 	emit_signal("texture_updated", texture_sheet)
@@ -184,10 +184,10 @@ func create_occluders():
 		if faces[i] < 0:
 			continue
 		var occluder = OccluderInstance3D.new()
-		occluder.shape = PolygonOccluder3D.new()
-		for p in range(occluder.shape.polygon_points.size()):
-			occluder.shape.polygon_points[p] *= occluder_multiplier
-		occluder.translation = positions[i]
+		#occluder.shape = PolygonOccluder3D.new()
+		#for p in range(occluder.shape.polygon_points.size()):
+		#	occluder.shape.polygon_points[p] *= occluder_multiplier
+		occluder.position = positions[i]
 		occluder.rotate(rot_axis[i / 4], rot_angle[i])
 		add_child(occluder)
 		occluders.append(occluder)

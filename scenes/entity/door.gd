@@ -1,12 +1,12 @@
-extends RigidBody
+extends RigidBody3D
 
 var opened := false
 
 func interact():
 	if !opened:
 		$Animation.play("open")
-		$Shape.disabled = true
+		$Shape3D.disabled = true
 	else:
 		$Animation.play_backwards("open")
-		$Shape.disabled = false
+		$Shape3D.disabled = false
 	opened = !opened

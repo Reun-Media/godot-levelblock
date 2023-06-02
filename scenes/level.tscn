@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dpsaib3a8pgyg"]
+[gd_scene load_steps=16 format=3 uid="uid://dpsaib3a8pgyg"]
 
 [ext_resource type="PackedScene" path="res://scenes/entity/player.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://bly3ltto83k3r" path="res://assets/tileset.png" id="2"]
@@ -76,6 +76,24 @@ _data = {
 [sub_resource type="BoxShape3D" id="3"]
 
 [sub_resource type="QuadMesh" id="4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pyiqm"]
+cull_mode = 2
+specular_mode = 2
+albedo_texture = ExtResource("2")
+metallic_specular = 0.0
+uv1_scale = Vector3(0.125, 0.25, 0.25)
+uv1_offset = Vector3(1.75, 0, 0)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bsl20"]
+cull_mode = 2
+specular_mode = 2
+albedo_texture = ExtResource("2")
+metallic_specular = 0.0
+uv1_scale = Vector3(0.125, 0.25, 0.25)
+uv1_offset = Vector3(1.875, 0, 0)
+texture_filter = 0
 
 [node name="Level" type="Node3D"]
 
@@ -359,7 +377,7 @@ generate_occluders = true
 
 [node name="Player" parent="." instance=ExtResource("1")]
 
-[node name="Door" type="RigidBody3D" parent="."]
+[node name="Door" type="AnimatableBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 script = ExtResource("3")
 
@@ -378,11 +396,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0.5, 0, 0)
 mesh = SubResource("4")
 skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_pyiqm")
 
 [node name="R" type="Node3D" parent="Door"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 
 [node name="Mesh" type="MeshInstance3D" parent="Door/R"]
 transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, -0.5, 0, 0)
+material_override = SubResource("StandardMaterial3D_bsl20")
 mesh = SubResource("4")
 skeleton = NodePath("../..")

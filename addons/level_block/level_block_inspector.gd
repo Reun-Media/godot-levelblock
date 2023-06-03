@@ -1,7 +1,7 @@
 extends EditorInspectorPlugin
 
-var BlockNode := preload("res://addons/level_block/level_block_node.gd")
-var TextureSelector := preload("res://addons/level_block/texture_selector.gd")
+const BlockNode := preload("res://addons/level_block/level_block_node.gd")
+const TextureSelector := preload("res://addons/level_block/texture_selector.gd")
 
 var face_paths := [
 	"north_face",
@@ -13,12 +13,12 @@ var face_paths := [
 ]
 
 
-func can_handle(object):
-	if object == BlockNode:
+func _can_handle(object):
+	if object is BlockNode:
 		return true
 	return false
 
-func parse_property(object, type, path, hint, hint_text, usage):
+func _parse_property(object, type, path, hint, hint_text, usage, wide):
 	if type == TYPE_INT:
 		for p in face_paths:
 			if p == path:

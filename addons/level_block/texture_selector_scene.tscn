@@ -7,10 +7,13 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 2
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 texture = ExtResource("1")
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="SpinBox" type="SpinBox" parent="."]
 layout_mode = 2

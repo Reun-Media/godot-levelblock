@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://dpsaib3a8pgyg"]
+[gd_scene load_steps=17 format=3 uid="uid://dpsaib3a8pgyg"]
 
 [ext_resource type="PackedScene" path="res://scenes/entity/player.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://bly3ltto83k3r" path="res://assets/tileset.png" id="2"]
 [ext_resource type="Script" path="res://scenes/entity/door.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://dul4gcwu55m0b" path="res://addons/level_block/example_tileset.png" id="3_c3ffj"]
 [ext_resource type="Script" path="res://addons/level_block/level_block_node.gd" id="4"]
 [ext_resource type="Material" uid="uid://c71yladfjhgud" path="res://addons/level_block/default_material.tres" id="5"]
 [ext_resource type="Script" path="res://scenes/entity/button_block.gd" id="6"]
@@ -125,7 +126,7 @@ omni_range = 6.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
 script = ExtResource("4")
 material = ExtResource("5")
-texture_sheet = ExtResource("2")
+texture_sheet = ExtResource("3_c3ffj")
 north_face = 1
 west_face = 0
 top_face = 5

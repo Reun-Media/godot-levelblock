@@ -26,7 +26,7 @@ func update_value(new_value: float):
 	refresh_control()
 	emit_changed(get_edited_property(), current_value)
 
-func update_property():
+func _update_property():
 	var new_value = get_edited_object()[get_edited_property()]
 	if (new_value == current_value):
 		refresh_control()
@@ -53,9 +53,7 @@ func refresh_control():
 		return
 	texture.texture = AtlasTexture.new()
 	texture.texture.atlas = texture_sheet.duplicate()
-	
-	if texture.texture.flags ^ 16: # REFER TO Texture2D.FLAG_CONVERT_TO_LINEAR 
-		texture.texture.flags &= 16 # https://docs.godotengine.org/cs/stable/classes/class_texture.html
+	# Texture flags have been moved to nodes in Godot 4
 	var pos = Vector2.ZERO
 	var gap = texture_size / texture_sheet.get_size().x
 	pos.x = fmod(gap * current_value, 1.0) * texture_sheet.get_size().x

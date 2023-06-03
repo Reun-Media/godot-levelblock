@@ -1,9 +1,9 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c71yladfjhgud"]
 
-[ext_resource type="Texture2D" uid="uid://bly3ltto83k3r" path="res://assets/tileset.png" id="1_dfpuw"]
+[ext_resource type="Texture2D" uid="uid://dul4gcwu55m0b" path="res://addons/level_block/example_tileset.png" id="1_s3lkm"]
 
 [resource]
 specular_mode = 2
-albedo_texture = ExtResource("1_dfpuw")
+albedo_texture = ExtResource("1_s3lkm")
 metallic_specular = 0.0
 texture_filter = 0

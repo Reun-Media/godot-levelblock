@@ -1,6 +1,12 @@
-# LevelBlock plugin for Godot 3.5
+# LevelBlock plugin for Godot 4
 ![screenshot](https://user-images.githubusercontent.com/37181529/207673239-13267fca-dc41-458d-bd58-e8f3d592b42a.png)
-**LevelBlock** is a new node for Godot 3.5 meant for the creation of levels in dungeon crawler -style games.
+
+![Godot - v4.0](https://img.shields.io/badge/Godot-v4.0-478cbf?style=flat-square&logo=godot-engine&labelColor=25282b)
+[![Asset Library](https://img.shields.io/badge/Asset_Library-2ea44f?style=flat-square)](https://godotengine.org/asset-library/asset/1584)
+
+_[Click here for Godot 3.5 version](https://github.com/Reun-Media/godot-levelblock/tree/godot-3)_
+
+**LevelBlock** is a new node for Godot 4 meant for the creation of levels in dungeon crawler -style games.
 
 This node acts as an inside-facing cube, using a texture atlas sheet to display different parts for each face.
 ## Getting started

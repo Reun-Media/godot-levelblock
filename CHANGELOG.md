@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [2.0.0] - 2023-06-07 - Godot 4 support
-**🎉 Levelblock has been updated to support Godot 4! 🎉**
+**🎉 LevelBlock has been updated to support Godot 4! 🎉**
 
 Check out the [godot-3 branch](https://github.com/Reun-Media/godot-levelblock/tree/godot-3) for 1.x version that supports Godot 3.5.
 

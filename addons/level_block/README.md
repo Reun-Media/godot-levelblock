@@ -1,5 +1,5 @@
 # LevelBlock plugin for Godot 4
-![screenshot](https://user-images.githubusercontent.com/37181529/207673239-13267fca-dc41-458d-bd58-e8f3d592b42a.png)
+![screenshot](https://github.com/Reun-Media/godot-levelblock/assets/37181529/94a5e1c3-e041-46d4-9961-d3cd526bf07a)
 
 ![Godot - v4.0](https://img.shields.io/badge/Godot-v4.0-478cbf?style=flat-square&logo=godot-engine&labelColor=25282b)
 [![Asset Library](https://img.shields.io/badge/Asset_Library-2ea44f?style=flat-square)](https://godotengine.org/asset-library/asset/1584)
@@ -19,7 +19,7 @@ This node acts as an inside-facing cube, using a texture atlas sheet to display 
 ## Features
 - Use a single texture sheet, with each face displaying a different part of it using an index value. This texture sheet will replace the albedo texture of the material.
 - Customize the material or use the included default material.
-- Use an arbitary size for the square textures in the atlast.
+- Use an arbitary size for the square textures in the atlas.
 - Quickly customize the texture displayed on each face.
 - Automatic collision generation for visible faces.
 - Automatic occluder node generation for visible faces.

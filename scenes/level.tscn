@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dpsaib3a8pgyg"]
+[gd_scene load_steps=18 format=3 uid="uid://dpsaib3a8pgyg"]
 
 [ext_resource type="PackedScene" path="res://scenes/entity/player.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://bly3ltto83k3r" path="res://assets/tileset.png" id="2"]
@@ -95,6 +95,10 @@ metallic_specular = 0.0
 uv1_scale = Vector3(0.125, 0.25, 0.25)
 uv1_offset = Vector3(1.875, 0, 0)
 texture_filter = 0
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_4w2hk"]
+vertices = PackedVector3Array(-0.75, -0.5, -2.25, -2.25, -0.5, -2.25, -2.25, -0.5, -0.75, -5.25, -0.5, -0.25, -5.5, -0.5, -2.25, -8.25, -0.5, -2.25, -8.25, -0.5, 0.5, 0.5, -0.5, -9.25, -0.25, -0.5, -9.25, -0.25, -0.5, -2.75, 0.5, -0.5, -2.5, -2.5, -0.5, 0.5, -2.75, -0.5, -0.25, -2.25, -0.5, 2.25, 2.5, -0.5, 2.25, 4.5, -0.5, -9.5, 4.5, -0.5, -10.25, -4.25, -0.5, -10.25, -4.25, -0.5, -9.5, 2.5, -0.5, -2.25)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 6), PackedInt32Array(8, 7, 9), PackedInt32Array(9, 7, 10), PackedInt32Array(12, 11, 3), PackedInt32Array(3, 11, 6), PackedInt32Array(9, 10, 0), PackedInt32Array(0, 10, 13), PackedInt32Array(13, 10, 14), PackedInt32Array(2, 11, 12), PackedInt32Array(11, 2, 13), PackedInt32Array(13, 2, 0), PackedInt32Array(18, 17, 8), PackedInt32Array(8, 17, 7), PackedInt32Array(7, 17, 15), PackedInt32Array(15, 17, 16), PackedInt32Array(10, 19, 14)]
 
 [node name="Level" type="Node3D"]
 
@@ -288,10 +292,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 script = ExtResource("4")
 material = ExtResource("5")
 texture_sheet = ExtResource("2")
-west_face = 9
 top_face = 5
 bottom_face = 4
-generate_collision = false
 generate_occluders = true
 
 [node name="LevelBlock19" type="Node3D" parent="Level"]
@@ -357,6 +359,15 @@ east_face = 9
 generate_collision = false
 generate_occluders = true
 
+[node name="FalseWall2" type="Node3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02381, 0, 0.00627279)
+script = ExtResource("4")
+material = ExtResource("5")
+texture_sheet = ExtResource("2")
+west_face = 0
+generate_collision = false
+generate_occluders = true
+
 [node name="LevelBlock9" type="Node3D" parent="Level"]
 script = ExtResource("4")
 material = ExtResource("5")
@@ -407,3 +418,6 @@ transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, -0.5, 0, 0)
 material_override = SubResource("StandardMaterial3D_bsl20")
 mesh = SubResource("4")
 skeleton = NodePath("../..")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_4w2hk")

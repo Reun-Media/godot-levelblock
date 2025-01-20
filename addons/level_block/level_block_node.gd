@@ -61,14 +61,8 @@ var mesh
 var shape
 var occluders : Array
 
-var source_geometry_parser: RID
-var source_geometry_parser_callback: Callable
-
 func _ready():
 	set_notify_transform(true)
-	source_geometry_parser_callback = Callable(self, "_on_source_geometry_parser_callback")
-	source_geometry_parser = NavigationServer3D.source_geometry_parser_create()
-	NavigationServer3D.source_geometry_parser_set_callback(source_geometry_parser, source_geometry_parser_callback)
 	refresh()
 
 func refresh():
@@ -196,17 +190,6 @@ func create_occluders():
 		add_child(occluder)
 		occluders.append(occluder)
 
-func _on_source_geometry_parser_callback(
-	p_navigation_mesh: NavigationMesh,
-	p_source_geometry_data: NavigationMeshSourceGeometryData3D,
-	p_parsed_node: Node) -> void:
-	if generate_collision:
-		p_source_geometry_data.add_mesh(mesh, transform)
-
-func delete_parser() -> void:
-	NavigationServer3D.free_rid(source_geometry_parser)
-	source_geometry_parser = RID()
-
 func _notification(what):
 	match what:
 		NOTIFICATION_TRANSFORM_CHANGED:
@@ -220,4 +203,3 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
 	clear()
-	delete_parser()

@@ -60,6 +60,7 @@ var body
 var mesh
 var shape
 var occluders : Array
+var mesh_faces := PackedVector3Array()
 
 func _ready():
 	set_notify_transform(true)
@@ -72,7 +73,12 @@ func refresh():
 		return
 	if generate_occluders:
 		create_occluders()
+	
 	mesh = create_mesh()
+	
+	# Store mesh faces for navmesh generation
+	mesh_faces = mesh.get_faces()
+	
 	mesh.surface_set_material(0, material)
 	material.albedo_texture = texture_sheet
 	# RenderingServer
@@ -108,6 +114,7 @@ func clear():
 		for o in occluders:
 			o.queue_free()
 	occluders.clear()
+	mesh_faces.clear()
 
 func get_uv_gap() -> float:
 	return float(texture_size) / texture_sheet.get_size().x

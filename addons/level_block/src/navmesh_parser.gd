@@ -34,4 +34,11 @@ func _on_source_geometry_parser_callback(
 	if not p_parsed_node.generate_collision:
 		return
 	
-	p_source_geometry_data.add_mesh(p_parsed_node.mesh, p_parsed_node.global_transform)
+	# Skip navmesh generation for LevelBlocks with no faces
+	if p_parsed_node.mesh_faces.size() == 0:
+		return
+	
+	p_source_geometry_data.add_faces(
+		p_parsed_node.mesh_faces,
+		p_parsed_node.global_transform
+	)

@@ -60,7 +60,10 @@ var body
 var mesh
 var shape
 var occluders : Array
+## Stores mesh faces for navmesh generation
 var mesh_faces := PackedVector3Array()
+## Stores mesh AABB for navmesh generation
+var mesh_aabb := AABB()
 
 func _ready():
 	set_notify_transform(true)
@@ -76,8 +79,9 @@ func refresh():
 	
 	mesh = create_mesh()
 	
-	# Store mesh faces for navmesh generation
+	# Store mesh faces and AABB for navmesh generation
 	mesh_faces = mesh.get_faces()
+	mesh_aabb = mesh.get_aabb()
 	
 	mesh.surface_set_material(0, material)
 	material.albedo_texture = texture_sheet

@@ -60,13 +60,15 @@ var body
 var mesh
 var shape
 var occluders : Array
-## Stores mesh faces for navmesh generation
-var mesh_faces := PackedVector3Array()
-## Stores mesh AABB for navmesh generation
-var mesh_aabb := AABB()
+
+var source_geometry_parser: RID
+var source_geometry_parser_callback: Callable
 
 func _ready():
 	set_notify_transform(true)
+	source_geometry_parser_callback = Callable(self, "_on_source_geometry_parser_callback")
+	source_geometry_parser = NavigationServer3D.source_geometry_parser_create()
+	NavigationServer3D.source_geometry_parser_set_callback(source_geometry_parser, source_geometry_parser_callback)
 	refresh()
 
 func refresh():
@@ -76,13 +78,7 @@ func refresh():
 		return
 	if generate_occluders:
 		create_occluders()
-	
 	mesh = create_mesh()
-	
-	# Store mesh faces and AABB for navmesh generation
-	mesh_faces = mesh.get_faces()
-	mesh_aabb = mesh.get_aabb()
-	
 	mesh.surface_set_material(0, material)
 	material.albedo_texture = texture_sheet
 	# RenderingServer
@@ -118,7 +114,6 @@ func clear():
 		for o in occluders:
 			o.queue_free()
 	occluders.clear()
-	mesh_faces.clear()
 
 func get_uv_gap() -> float:
 	return float(texture_size) / texture_sheet.get_size().x
@@ -201,6 +196,18 @@ func create_occluders():
 		add_child(occluder)
 		occluders.append(occluder)
 
+func _on_source_geometry_parser_callback(
+	p_navigation_mesh: NavigationMesh,
+	p_source_geometry_data: NavigationMeshSourceGeometryData3D,
+	p_parsed_node: Node) -> void:
+	if generate_collision:
+		p_source_geometry_data.add_mesh(mesh, transform)
+
+func delete_parser() -> void:
+	if source_geometry_parser.is_valid():
+		NavigationServer3D.free_rid(source_geometry_parser)
+	source_geometry_parser = RID()
+
 func _notification(what):
 	match what:
 		NOTIFICATION_TRANSFORM_CHANGED:
@@ -214,3 +221,5 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
 	clear()
+	if source_geometry_parser.is_valid():
+		delete_parser()
